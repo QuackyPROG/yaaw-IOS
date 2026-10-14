@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "YAAW-iOS review record",
+  "type": "object",
+  "required": [
+    "schema",
+    "ticket",
+    "ticket_revision",
+    "result",
+    "repository_identity",
+    "evidence_refs",
+    "independent_context"
+  ],
+  "properties": {
+    "schema": {
+      "const": "yaaw-ios-review-v1"
+    },
+    "ticket": {
+      "type": "string"
+    },
+    "ticket_revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "result": {
+      "enum": [
+        "PASS",
+        "REPAIR",
+        "REPLAN",
+        "BLOCKED"
+      ]
+    },
+    "repository_identity": {
+      "type": "object"
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "independent_context": {
+      "const": true
+    },
+    "findings": {
+      "type": "array"
+    }
+  },
+  "additionalProperties": true
+}

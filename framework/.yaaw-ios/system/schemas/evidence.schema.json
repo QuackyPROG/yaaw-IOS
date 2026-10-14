@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "YAAW-iOS implementation evidence",
+  "type": "object",
+  "required": [
+    "schema",
+    "ticket",
+    "ticket_revision",
+    "repository_identity",
+    "environment",
+    "outcome",
+    "native_boundary"
+  ],
+  "properties": {
+    "schema": {
+      "const": "yaaw-ios-evidence-v1"
+    },
+    "ticket": {
+      "type": "string"
+    },
+    "ticket_revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "repository_identity": {
+      "type": "object"
+    },
+    "environment": {
+      "enum": [
+        "windows-local",
+        "eas-ios-simulator",
+        "eas-build",
+        "physical-iphone",
+        "manual-device",
+        "automated-device"
+      ]
+    },
+    "command_or_scenario": {
+      "type": "string"
+    },
+    "outcome": {
+      "enum": [
+        "PASS",
+        "FAIL",
+        "BLOCKED"
+      ]
+    },
+    "native_boundary": {
+      "enum": [
+        "JS_ONLY",
+        "EXPO_MANAGED",
+        "CONFIG_PLUGIN",
+        "NATIVE_REBUILD_REQUIRED",
+        "CUSTOM_NATIVE_MODULE",
+        "MACOS_REQUIRED",
+        "UNSUPPORTED_ON_CURRENT_HOST"
+      ]
+    },
+    "build_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "bundle_identifier": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

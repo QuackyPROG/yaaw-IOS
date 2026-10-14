@@ -1,0 +1,261 @@
+{
+  "schema": "yaaw-ios-kernel-v1",
+  "version": 1,
+  "frameworkRoot": ".yaaw-ios",
+  "paths": {
+    "system": ".yaaw-ios/system",
+    "project": ".yaaw-ios/project",
+    "runtime": ".yaaw-ios/runtime",
+    "install": ".yaaw-ios/install"
+  },
+  "roles": {
+    "orchestrator": {
+      "spawnable": false,
+      "authority": [
+        "observe",
+        "route",
+        "reconcile",
+        "dispatch"
+      ]
+    },
+    "ios-environment": {
+      "spawnable": true,
+      "authority": [
+        "environment",
+        "device",
+        "setup"
+      ]
+    },
+    "prd": {
+      "spawnable": true,
+      "authority": [
+        "product"
+      ]
+    },
+    "ios-planner": {
+      "spawnable": true,
+      "authority": [
+        "engineering",
+        "specs",
+        "tickets"
+      ]
+    },
+    "implementer": {
+      "spawnable": true,
+      "authority": [
+        "implementation",
+        "evidence"
+      ]
+    },
+    "reviewer": {
+      "spawnable": true,
+      "requiresFreshContext": true,
+      "authority": [
+        "acceptance"
+      ]
+    }
+  },
+  "nativeBoundary": [
+    "JS_ONLY",
+    "EXPO_MANAGED",
+    "CONFIG_PLUGIN",
+    "NATIVE_REBUILD_REQUIRED",
+    "CUSTOM_NATIVE_MODULE",
+    "MACOS_REQUIRED",
+    "UNSUPPORTED_ON_CURRENT_HOST"
+  ],
+  "verificationEnvironments": [
+    "windows-local",
+    "eas-ios-simulator",
+    "eas-build",
+    "physical-iphone",
+    "manual-device",
+    "automated-device"
+  ],
+  "reviewResults": [
+    "PASS",
+    "REPAIR",
+    "REPLAN",
+    "BLOCKED"
+  ],
+  "ticketTransitions": {
+    "DRAFT": [
+      "READY",
+      "BLOCKED",
+      "CANCELLED"
+    ],
+    "READY": [
+      "IMPLEMENTING",
+      "DRAFT",
+      "BLOCKED",
+      "CANCELLED"
+    ],
+    "IMPLEMENTING": [
+      "REVIEW",
+      "BLOCKED"
+    ],
+    "REVIEW": [
+      "PASS",
+      "REPAIR",
+      "REPLAN",
+      "BLOCKED"
+    ],
+    "REPAIR": [
+      "IMPLEMENTING",
+      "BLOCKED"
+    ],
+    "REPLAN": [
+      "DRAFT",
+      "BLOCKED"
+    ],
+    "BLOCKED": [
+      "DRAFT",
+      "READY",
+      "IMPLEMENTING",
+      "REVIEW",
+      "CANCELLED"
+    ],
+    "PASS": [],
+    "CANCELLED": []
+  },
+  "skills": {
+    "yaaw-ios-orchestrator": {
+      "role": "orchestrator",
+      "operation": "orchestrate",
+      "reads": [
+        "project/**",
+        "runtime/**"
+      ],
+      "writes": [
+        "runtime/**"
+      ]
+    },
+    "yaaw-ios-setup": {
+      "role": "ios-environment",
+      "operation": "diagnose-and-setup",
+      "modules": [
+        "expo-react-native",
+        "ios-device",
+        "eas-build"
+      ],
+      "reads": [
+        "project/environment.json",
+        "project/device.json"
+      ],
+      "writes": [
+        "project/environment.json",
+        "project/device.json"
+      ]
+    },
+    "yaaw-ios-prd": {
+      "role": "prd",
+      "operation": "define-product",
+      "modules": [
+        "apple-design",
+        "ios-accessibility",
+        "security-privacy"
+      ],
+      "reads": [
+        "project/product.md"
+      ],
+      "writes": [
+        "project/product.md"
+      ]
+    },
+    "yaaw-ios-planner": {
+      "role": "ios-planner",
+      "operation": "plan-ios",
+      "modules": [
+        "expo-react-native",
+        "ios-navigation",
+        "ios-accessibility",
+        "eas-build",
+        "testing",
+        "security-privacy"
+      ],
+      "reads": [
+        "project/product.md",
+        "project/engineering.md",
+        "project/research/**"
+      ],
+      "writes": [
+        "project/engineering.md",
+        "project/research/**",
+        "project/specs/**",
+        "project/tickets/**"
+      ]
+    },
+    "yaaw-ios-implement": {
+      "role": "implementer",
+      "operation": "implement-ticket",
+      "modules": [
+        "expo-react-native",
+        "testing"
+      ],
+      "repositoryIdentityRequired": true,
+      "reads": [
+        "project/tickets/**",
+        "project/specs/**",
+        "project/engineering.md"
+      ],
+      "writes": [
+        "application",
+        "project/evidence/**"
+      ]
+    },
+    "yaaw-ios-review": {
+      "role": "reviewer",
+      "operation": "review-ticket",
+      "modules": [
+        "apple-design",
+        "ios-accessibility",
+        "testing"
+      ],
+      "repositoryIdentityRequired": true,
+      "reads": [
+        "application",
+        "project/tickets/**",
+        "project/specs/**",
+        "project/evidence/**"
+      ],
+      "writes": [
+        "project/reviews/**"
+      ]
+    },
+    "yaaw-ios-device-test": {
+      "role": "ios-environment",
+      "operation": "verify-device",
+      "modules": [
+        "ios-device",
+        "ios-accessibility"
+      ],
+      "reads": [
+        "project/device.json",
+        "project/tickets/**"
+      ],
+      "writes": [
+        "project/device.json",
+        "project/evidence/**"
+      ]
+    },
+    "yaaw-ios-release": {
+      "role": "ios-planner",
+      "operation": "plan-release",
+      "modules": [
+        "eas-build",
+        "app-store",
+        "security-privacy",
+        "testing"
+      ],
+      "repositoryIdentityRequired": true,
+      "reads": [
+        "project/**"
+      ],
+      "writes": [
+        "project/engineering.md",
+        "project/specs/**",
+        "project/tickets/**"
+      ]
+    }
+  }
+}

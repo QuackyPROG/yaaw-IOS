@@ -1,0 +1,33 @@
+{
+  "name": "yaaw-ios",
+  "version": "0.1.0",
+  "description": "Artifact-first autonomous iOS engineering workflow for Windows + Codex + Expo + EAS.",
+  "type": "module",
+  "bin": {
+    "yaaw-ios": "./bin/yaaw-ios.mjs"
+  },
+  "files": [
+    "bin/**",
+    "src/**",
+    "framework/**",
+    "skills/**",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=20.12.0"
+  },
+  "scripts": {
+    "test": "node --test",
+    "check": "node scripts/validate-framework.mjs && node --test",
+    "prepack": "npm run check"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QuackyPROG/yaaw-IOS.git"
+  },
+  "bugs": {
+    "url": "https://github.com/QuackyPROG/yaaw-IOS/issues"
+  },
+  "homepage": "https://github.com/QuackyPROG/yaaw-IOS#readme",
+  "license": "MIT"
+}

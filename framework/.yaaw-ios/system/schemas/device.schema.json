@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "YAAW-iOS device state",
+  "type": "object",
+  "required": [
+    "schema",
+    "revision",
+    "state",
+    "evidence"
+  ],
+  "properties": {
+    "schema": {
+      "const": "yaaw-ios-device-v1"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "state": {
+      "enum": [
+        "DEVICE_NOT_CONFIGURED",
+        "DEVICE_READY",
+        "DEVICE_BUILD_MISSING",
+        "DEVICE_TEST_REQUIRED",
+        "DEVICE_TEST_PASS",
+        "DEVICE_TEST_FAIL",
+        "DEVICE_TEST_BLOCKED"
+      ]
+    },
+    "evidence": {
+      "type": "array"
+    }
+  },
+  "additionalProperties": true
+}

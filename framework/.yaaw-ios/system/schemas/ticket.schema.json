@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "YAAW-iOS ticket metadata",
+  "type": "object",
+  "required": [
+    "id",
+    "revision",
+    "status",
+    "native_boundary",
+    "verification"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^TASK-"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "status": {
+      "enum": [
+        "DRAFT",
+        "READY",
+        "IMPLEMENTING",
+        "REVIEW",
+        "REPAIR",
+        "REPLAN",
+        "BLOCKED",
+        "PASS",
+        "CANCELLED"
+      ]
+    },
+    "native_boundary": {
+      "enum": [
+        "JS_ONLY",
+        "EXPO_MANAGED",
+        "CONFIG_PLUGIN",
+        "NATIVE_REBUILD_REQUIRED",
+        "CUSTOM_NATIVE_MODULE",
+        "MACOS_REQUIRED",
+        "UNSUPPORTED_ON_CURRENT_HOST"
+      ]
+    },
+    "verification": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "windows-local",
+          "eas-ios-simulator",
+          "eas-build",
+          "physical-iphone",
+          "manual-device",
+          "automated-device"
+        ]
+      }
+    }
+  },
+  "additionalProperties": true
+}

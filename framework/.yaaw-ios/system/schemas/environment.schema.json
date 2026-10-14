@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "YAAW-iOS durable environment conclusions",
+  "type": "object",
+  "required": [
+    "schema",
+    "revision",
+    "conclusions"
+  ],
+  "properties": {
+    "schema": {
+      "const": "yaaw-ios-environment-v1"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "conclusions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "status",
+          "conclusion"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "PASS",
+              "WARNING",
+              "ACTION_REQUIRED",
+              "UNAVAILABLE_ON_WINDOWS",
+              "OPTIONAL"
+            ]
+          },
+          "conclusion": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": true
+}

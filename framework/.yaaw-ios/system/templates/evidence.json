@@ -1,0 +1,13 @@
+{
+  "schema": "yaaw-ios-evidence-v1",
+  "ticket": "TASK-000",
+  "ticket_revision": 1,
+  "repository_identity": {},
+  "environment": "windows-local",
+  "command_or_scenario": "",
+  "outcome": "PASS",
+  "native_boundary": "JS_ONLY",
+  "build_id": null,
+  "bundle_identifier": null,
+  "notes": ""
+}
